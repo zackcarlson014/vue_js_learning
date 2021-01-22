@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Vue app</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        {{message}}
+        <ol>
+            <contact
+                v-for='contactItem in contacts'
+                v-bind:contact-prop='contactItem'
+                v-bind:key='contactItem.name'>
+            </contact>
+        </ol>
+    </div>
+    <script>
+        let contactStorage = [
+             {name: 'Jimmy', phoneNumber: '555-555-5555'},
+             {name: 'Zack', phoneNumber: '555-555-5556'},
+             {name: 'Pedro', phoneNumber: '555-555-5557'},
+             {name: 'Maria', phoneNumber: '555-555-5559'},
+        ];
+        Vue.component('contact', {
+            template: `<li>
+                Name: {{contactProp.name}}<br/>
+                Phone: {{contactProp.phoneNumber}}
+            </li>`,
+            props: ['contactProp']
+        });
+        {% comment %} debugger {% endcomment %}
+        let App = new Vue({
+            el: '#app',
+            data: {
+                message: "Hello, User!",
+                contacts: contactStorage
+            }
+        }); 
+    </script> 
+</body>
+</html>
